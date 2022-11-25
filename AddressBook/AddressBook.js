@@ -1,4 +1,12 @@
 console.log("<<<< Welcome To Address Book System >>>>");
+
+const nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
+const addressRegex = RegExp('^[a-zA-z]{4,}$');
+const cityStateRegex = RegExp('^[a-zA-z]{4,}$');
+const zipRegex = RegExp("^[0-9]{3}\\s{0,1}[0-9]{3}$");
+const phoneNumberRegex = RegExp("^[0-9]{2}[0-9]{10}$");
+const emailRegex = RegExp("^[a-zA-Z]+[a-zA-Z0-9]*[- . + _]?[a-zA-Z0-9]+[@]{1}[a-z0-9]+[.]{1}[a-z]+[.]?[a-z]+$");
+
 class Contact{
 
     constructor(...params){
@@ -45,40 +53,68 @@ class Contact{
     }
 
     set firstName(firstName){
-        this.fName = firstName;
+        if(nameRegex.test(firstName))
+            this.fName = firstName;
+        else
+            throw "first name is incorrect"
     }
 
     set lastName(lastName){
-        this.lName = lastName;
+        if(nameRegex.test(lastName))
+            this.lName = lastName;
+        else
+            throw "last name is Incorrect"
     }
 
     set address(address){
-        this.address1 = address;
-    }
+        if(addressRegex.test(address))
+            this.address1 = address;
+        else
+            throw "address in incorrect"
+        }
 
     set city(city){
-        this.city1 = city;
-    }
+        if(cityStateRegex.test(city))
+            this.city1 = city;
+        else
+            throw "incorrect city"
+        }
 
     set state(state){
-        this.state1 = state;
+        if(cityStateRegex.test(state))
+            this.state1 = state;
+        else
+            throw "incorrect state"
     }
 
     set zip(zip){
-        this.zip1 = zip;
+        if(zipRegex.test(zip))
+            this.zip1 = zip;
+        else
+            throw "incorrect zip"
     }
 
     set phoneNumber(phoneNumber){
-        this.phoneNum = phoneNumber;
+        if(phoneNumberRegex.test(phoneNumber))
+            this.phoneNum = phoneNumber;
+        else
+            throw "incorrect phone_Number"
     }
 
     set email(email){
-        this.email1 = email;
+        if(emailRegex.test(email))
+            this.email1 = email;
+        else
+            throw "incorrect email"
     }
     toString(){
         return "First_Name : "+ this.firstName + ", Last_Name : "+ this.lastName +", Address : "+this.address +", City : "+ this.city + ", State : "+ this.state +", Zip : "+ this.zip+ ", Phone_Number : "+ this.phoneNumber + ", Email : "+ this.email;
     }
 }
-
-let contact = new Contact("shivani", "kumari","xyz","abc", "Lucknow",654512, 8765443545, "shivani@gmail.com");
+try{
+let contact = new Contact("shivani", "kumari","abcd","Lucknow", "Uttar pradesh",273008, 87565765764, "shivani@gmail.com");
 console.log(contact.toString());
+}
+catch(e){
+    console.log(e)
+}
